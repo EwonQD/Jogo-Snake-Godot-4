@@ -12,6 +12,7 @@ func _create_touch_controls():
 	$DPad/RightButton.pressed.connect(_on_right_pressed)
 
 func _on_up_pressed():
+	print("Botão CIMA pressionado")
 	emit_signal("direction_changed", Vector2.UP)
 
 func _on_down_pressed():

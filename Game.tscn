@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://0usmghy5kky5"]
+[gd_scene load_steps=8 format=3 uid="uid://0usmghy5kky5"]
 
 [ext_resource type="Script" uid="uid://dfv8hjx4ejtec" path="res://Game.gd" id="1_wbfu4"]
 [ext_resource type="Script" uid="uid://n1lve53jt1ct" path="res://Background.gd" id="2_u44n3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" uid="uid://b588cj70ob08c" path="res://FoodManager.gd" id="4_sb48q"]
 [ext_resource type="Script" uid="uid://bp26waoe7p4e0" path="res://UI.gd" id="5_t88pq"]
 [ext_resource type="AudioStream" uid="uid://cj7rpp2rvllr3" path="res://audio/loopgame.ogg" id="6_r0x5m"]
+[ext_resource type="AudioStream" uid="uid://ds8pbgap17tuj" path="res://audio/death-sound.ogg" id="7_3mrqo"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_wbfu4")
@@ -91,5 +92,6 @@ text = "→"
 
 [node name="AudioPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_r0x5m")
-autoplay = true
-parameters/looping = true
+
+[node name="GameOverSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_3mrqo")

@@ -51,15 +51,20 @@ func _process(delta):
 		var ate_food = snake.move_snake(food_manager.food_positions)
 		if ate_food:
 			food_manager.food_positions.erase(snake.snake[0])
-		queue_redraw()  # redesenha a cena
+			food_manager.queue_redraw()  # redesenha a cena
 
 func _set_direction(new_dir: Vector2):
 	snake.set_direction(new_dir)
 
 func _game_over():
-	game_over = true
-	set_process(false)
-	# Pode exibir mensagem ou trocar de cena aqui
+	# Para a música de fundo — só aqui na finalização do jogo
+	$AudioPlayer.stop()
+	# Toca o som de game over só agora, na hora do game over
+	$GameOverSound.play()
+	# Aguarda 4 segundos para que o som toque e o jogador veja o game over
+	await get_tree().create_timer(4.0).timeout
+	# Volta para o menu inicial
+	get_tree().change_scene_to_file("res://MainMenu.tscn")
 
 func _restart_game():
 	game_over = false

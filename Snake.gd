@@ -9,15 +9,16 @@ signal game_over_signal
 
 func init_snake(start_pos : Vector2):
 	snake = [start_pos]
-	direction = Vector2.ZERO
+	direction = Vector2.RIGHT
 
 func set_direction(new_dir: Vector2):
-	if new_dir + direction != Vector2.ZERO:
-		direction = new_dir
+	if direction != Vector2.ZERO and new_dir == -direction:
+		return
+	direction = new_dir
 
 func move_snake(food_positions : Array) -> bool:
 	var new_head = snake[0] + direction
-	
+
 	if new_head.x < 0:
 		new_head.x = grid_size.x - 1
 	elif new_head.x >= grid_size.x:
@@ -35,10 +36,12 @@ func move_snake(food_positions : Array) -> bool:
 	snake.insert(0, new_head)
 
 	if new_head in food_positions:
-		return true  # Comeu comida
+		return true
 	else:
 		snake.pop_back()
-		return false
+
+	queue_redraw()  # <- FORÇA o redesenho da cobrinha
+	return false
 
 func _draw():
 	for segment in snake:
